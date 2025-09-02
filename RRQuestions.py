@@ -39,13 +39,17 @@ def fetch_questions(sheet_url):
 # Function to get Gertrude's status
 def get_gertrude_status():
     try:
-        prompt = ("Imagine I had a pet rock named Gertrude, who is pretty boring. "
-                  "Tell me the current status of Gertrude in 1 sentence. Occasionally, "
-                  "make it crazy or adventurous. Include interactions with people: "
-                  "Shadipto, Jessie, Charvi, Mrs. Tran, Nailah, Olivia, Andrew, Ronald, "
-                  "Archi, Jowayne, Bryce, Damola, Grace.")
-        
-        model = genai.GenerativeModel(model_name="gemini-pro")
+        models = genai.list_models()
+        # Pick a model that supports generateContent
+        model_name = next(
+            (m.name for m in models if "generateContent" in m.supported_generation_methods),
+            None
+        )
+        if not model_name:
+            return "No available models support generateContent."
+
+        model = genai.GenerativeModel(model_name=model_name)
+        prompt = ("Imagine I had a pet rock named Gertrude... [your prompt here]")
         response = model.generate_content(prompt)
         return response.text.strip()
     except Exception as e:
