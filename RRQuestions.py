@@ -56,7 +56,7 @@ def get_gertrude_status():
         return f"Error fetching Gertrude's status: {e}"
 
 # Streamlit app
-st.title("Quiz Game with Gertrude's Adventures")
+st.title("Readers Rally Practice Hub 📚📝 ")
 
 # Initialize session state
 if "questions" not in st.session_state:
