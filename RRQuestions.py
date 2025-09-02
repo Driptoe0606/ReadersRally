@@ -13,13 +13,17 @@ gemini_model = genai.GenerativeModel('gemini-pro')
 
 # Function to convert Google Sheets URL to CSV export link
 def convert_to_csv_export_url(sheet_url):
-    match = re.match(r'https://docs.google.com/spreadsheets/d/([^/]+)/edit\\?gid=(\\d+)', sheet_url)
+    # Try to extract the sheet ID and gid even if URL is in different formats
+    match = re.search(r'/d/([a-zA-Z0-9-_]+)', sheet_url)
+    gid_match = re.search(r'gid=(\d+)', sheet_url)
+
     if match:
         sheet_id = match.group(1)
-        gid = match.group(2)
+        gid = gid_match.group(1) if gid_match else "0"  # Default to first sheet if no gid
         return f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv&gid={gid}"
     else:
-        raise ValueError("Invalid Google Sheets URL")
+        raise ValueError("Invalid Google Sheets URL. Make sure it's a valid Google Sheet link.")
+
 
 # Function to fetch questions from a Google Sheet
 def fetch_questions(sheet_url):
