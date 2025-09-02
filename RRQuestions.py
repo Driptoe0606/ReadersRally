@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 import re
@@ -10,6 +9,17 @@ import google.generativeai as genai
 GOOGLE_API_KEY = 'AIzaSyDpNBBrdp32QWNWkv6XHRls0WaKORmmYCQ'
 genai.configure(api_key=GOOGLE_API_KEY)
 gemini_model = genai.GenerativeModel('gemini-pro')
+
+rock_images = [
+    "https://www.kickstarter.com/projects/1324841533/googly-eyes-for-rocks/posts/2015-09-05-14-13-48-1.jpg",
+    "https://thingadayforever.files.wordpress.com/2013/02/rock-with-googly-eyes.jpg",
+    "https://shop.a24films.com/products/everything-everywhere-all-at-once-pet-rock.jpg",
+    "https://www.etsy.com/listing/1433616323/googly-eye-pet-rock-amigurumi-crochet.jpg",
+    "https://www.shutterstock.com/search/googly-eyes-rock.jpg",
+    "https://nextshark.com/everything-everywhere-auction-rock-googly-eyes.jpg",
+    "https://www.sendsomerocks.com/images/rock-with-googly-eyes.jpg",
+    "https://jclovely.com/products/evelyn-rock.jpg"
+]
 
 # Function to convert Google Sheets URL to CSV export link
 def convert_to_csv_export_url(sheet_url):
@@ -104,17 +114,7 @@ if st.button("Check Gertrude's Status"):
     loading_text.text("Done! ✅")
     st.success(status)
 
-    ## AI image generation for Gertrude
-    try:
-        image_prompt = f"A funny cartoon illustration of Gertrude, a pet rock, based on: {status}"
-        
-        image_response = genai.images.generate(
-            model="image-bison-001",  # Google's text-to-image model
-            prompt=image_prompt,
-            size="1024x1024"
-        )
-        
-        # The generated image URL is in image_response.output[0].uri
-        st.image(image_response.output[0].uri, caption="Gertrude's AI illustration", use_column_width=True)
-    except Exception as e:
-        st.error(f"Could not generate Gertrude image: {e}")
+    # Display a random rock image with googly eyes
+    rock_image = random.choice(rock_images)
+    st.image(rock_image, caption="Gertrude's new friend", use_column_width=True)
+
