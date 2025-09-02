@@ -48,7 +48,7 @@ def get_gertrude_status():
         if not model_name:
             return "No available models support generateContent."
 
-        model = genai.GenerativeModel(model_name=model_name)
+        model = genai.GenerativeModel(model_name="gemini-2.5-flash")
         prompt = ("Imagine I had a pet rock named Gertrude... [your prompt here]")
         response = model.generate_content(prompt)
         return response.text.strip()
