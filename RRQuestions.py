@@ -116,5 +116,5 @@ if st.button("Check Gertrude's Status"):
 
     # Display a random rock image with googly eyes
     rock_image = random.choice(rock_images)
-    st.image(rock_image, caption="Gertrude's new friend", use_column_width=True)
+    st.image(rock_image, caption="Gertrude's new friend", use_container_width=True)
 
