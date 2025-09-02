@@ -104,15 +104,17 @@ if st.button("Check Gertrude's Status"):
     loading_text.text("Done! ✅")
     st.success(status)
 
-    # Generate a random image for Gertrude using AI
+    ## AI image generation for Gertrude
     try:
         image_prompt = f"A funny cartoon illustration of Gertrude, a pet rock, based on: {status}"
-        image_response = genai.generate_image(
-            model="image-bison-001",
+        
+        image_response = genai.images.generate(
+            model="image-bison-001",  # Google's text-to-image model
             prompt=image_prompt,
             size="1024x1024"
         )
-        # image_response.content is base64; st.image can accept URL or bytes
-        st.image(image_response.uri, caption="Gertrude's AI illustration", use_column_width=True)
+        
+        # The generated image URL is in image_response.output[0].uri
+        st.image(image_response.output[0].uri, caption="Gertrude's AI illustration", use_column_width=True)
     except Exception as e:
         st.error(f"Could not generate Gertrude image: {e}")
