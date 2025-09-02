@@ -49,7 +49,7 @@ def get_gertrude_status():
             return "No available models support generateContent."
 
         model = genai.GenerativeModel(model_name="gemini-2.5-flash")
-        prompt = ("Imagine I had a pet rock named Gertrude... [your prompt here]")
+        prompt = ("Imagine I had a pet rock named Gertrude, who is pretty boring." " "Tell me the current status of Gertrude in 1 sentence. Occasionally, " "make it crazy or adventurous. Include interactions with people: Shadipto, Jessie, Charvi, Mrs. Tran, Nailah, Olivia, Andrew, Ronald, Archi, Jowayne, Bryce, Damola, Grace")
         response = model.generate_content(prompt)
         return response.text.strip()
     except Exception as e:
