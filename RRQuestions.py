@@ -57,7 +57,7 @@ def get_gertrude_status():
 
 # Streamlit app
 st.title("Readers Rally Practice Hub 📚📝 ")
-st.image("tutorial.gif", use_column_width=True)
+st.image("tutorial.gif.gif", use_column_width=True)
 
 # Initialize session state
 if "questions" not in st.session_state:
