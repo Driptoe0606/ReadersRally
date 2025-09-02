@@ -57,6 +57,7 @@ def get_gertrude_status():
 
 # Streamlit app
 st.title("Readers Rally Practice Hub 📚📝 ")
+st.subheader("Tutorial")
 st.image("tutorial.gif.gif", use_container_width=True)
 
 # Initialize session state
