@@ -41,11 +41,15 @@ def get_gertrude_status():
     try:
         prompt = ("Imagine I had a pet rock named Gertrude, who is pretty boring. "
                   "Tell me the current status of Gertrude in 1 sentence. Occasionally, "
-                  "make it crazy or adventurous. Include interactions with people: Shadipto, Jessie, Charvi, Mrs. Tran, Nailah, Olivia, Andrew, Ronald, Archi, Jowayne, Bryce, Damola, Grace.")
-        response = gemini_model.generate_content(prompt)
+                  "make it crazy or adventurous. Include interactions with people: "
+                  "Shadipto, Jessie, Charvi, Mrs. Tran, Nailah, Olivia, Andrew, Ronald, "
+                  "Archi, Jowayne, Bryce, Damola, Grace.")
+        
+        model = genai.GenerativeModel(model_name="gemini-pro")
+        response = model.generate_content(prompt)
         return response.text.strip()
     except Exception as e:
-        return "Unable to fetch Gertrude's status."
+        return f"Error fetching Gertrude's status: {e}"
 
 # Streamlit app
 st.title("Quiz Game with Gertrude's Adventures")
