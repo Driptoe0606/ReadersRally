@@ -95,5 +95,24 @@ if st.button("Show Answer"):
 
 # Gertrude's Status
 if st.button("Check Gertrude's Status"):
+    loading_text = st.text("Loading Gertrude's status... ⏳")
+    
+    # Get status
     status = get_gertrude_status()
+    
+    # Update loading text to success
+    loading_text.text("Done! ✅")
     st.success(status)
+
+    # Generate a random image for Gertrude using AI
+    try:
+        image_prompt = f"A funny cartoon illustration of Gertrude, a pet rock, based on: {status}"
+        image_response = genai.generate_image(
+            model="image-bison-001",
+            prompt=image_prompt,
+            size="1024x1024"
+        )
+        # image_response.content is base64; st.image can accept URL or bytes
+        st.image(image_response.uri, caption="Gertrude's AI illustration", use_column_width=True)
+    except Exception as e:
+        st.error(f"Could not generate Gertrude image: {e}")
